@@ -54,3 +54,27 @@ let num = arra.find(el => el > 3);
 let numIndex = arra.findIndex(el => el > 3);
 console.log(num);
 console.log(numIndex);
+
+// Iteradores
+// son objetos que contienen un metodo next()
+// Ese metodo devuelve un objeto con dos propiedades: value y done
+// value -> valor del elemento actual
+// done -> true si ya no hay mas elementos
+
+// keys() -> devuelve un iterador con las claves del objeto
+// values() -> devuelve un iterador con los valores del objeto
+// entries() -> devuelve un iterador con las claves y valores del objeto
+
+let iter = arr.keys();
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
+console.log(iter.next());
