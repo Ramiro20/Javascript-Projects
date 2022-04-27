@@ -34,9 +34,16 @@ function sumarTodos() {
 
 console.log(sumarTodos(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-function sum(a, b) {
+function sumi(a, b) {
     return a + b;
 }
 
 let num = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-console.log(sum(...num));
+console.log(`suma de todos , ${sumi(...num)}`);
+
+function sumarT(...elements) {
+    return elements.reduce((a, b) => a + b);
+}
+
+
+console.log(sumarT(1, 2, 3, 4, 5, 6, 7, 8, 9));
