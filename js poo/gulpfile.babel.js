@@ -14,3 +14,7 @@ gulp.task('es6', () => {
         .pipe(babel())
         .pipe(gulp.dest('./es5'))
 });
+
+gulp.task('default', () => {
+    gulp.watch('./es6/*.js', gulp.series('es6'))
+});
