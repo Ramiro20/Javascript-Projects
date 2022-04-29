@@ -27,14 +27,15 @@ class TaskList{
 
     renderTasks(element){
         let tasks = this.tasks.map( task =>`
-        <li class="task">
-            <input type="checkbox" class="task__complete-button">
+        <li class="task  ${task.isComplete ? 'complete' : ''}">
+            <input type="checkbox" 
+            class="task__complete-button" ${task.isComplete ? 'checked' : ''}>
             <span class="task__name">${task.name}</span>
-            <a href="#" class="task__remove-button"></a>
+            <a href="#" class="task__remove-button close"></a>
         </li>
         `    
         );
-        element.innerHTML = tasks.reduce((a,b) => a +b);
+        element.innerHTML = tasks.reduce((a,b) => a +b, '');
     }
 }
 
@@ -55,7 +56,7 @@ function addDOMTask(e, list = inbox){
     }
    // crear la tarea instanciando la clase
    // añadir la tarea a la lista
-   console.log(e.key);
+   //console.log(e.key);
 }
 
 addTaskElement.addEventListener('keyup',addDOMTask);
@@ -63,9 +64,35 @@ addTaskElement.addEventListener('keyup',addDOMTask);
 //keydown es cuando se presiona una tecla
 //keyup es cuando se suelta la tecla
 
+// obtener indice de la tarea actual
+function getTaskIndex(e){
+    let taskItem = e.target.parentElement,
+        tasksItems = [...tasksContainerElement.querySelectorAll('li')];
+        return tasksItems.indexOf(taskItem);
+}
+
 //eliminar tarea desde el DOM
-function removeDOMTask(e){
-    console.log('remove');
+function removeDOMTask(e, list = inbox){
+    // detectar que se hizo click en el enlace
+    if(e.target.tagName === 'A'){
+        
+        //remover tarea de la lista (se necesita el índice)
+        list.removeTask(getTaskIndex(e), tasksContainerElement);
+    }
 }
 
 tasksContainerElement.addEventListener('click', removeDOMTask);
+
+// completar la tarea
+function completeDOMTask(e, list = inbox){
+    // detectar que se hizo click en el input
+    if(e.target.tagName === 'INPUT'){
+        
+        //completar tarea de la lista (se necesita el índice)
+        list.tasks[getTaskIndex(e)].complete();
+        e.target.parentElement.classList.toggle('complete');
+        console.table(list.tasks);
+    }
+}
+
+tasksContainerElement.addEventListener('click', completeDOMTask);
